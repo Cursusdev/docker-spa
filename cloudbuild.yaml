@@ -1,3 +1,7 @@
+# gis-account-manager -> Project ID on GCP
 steps:
-  - name: gcr.io/cloud-builders/gsutil
-    args: ["-m", "rsync", "-r", "-c", "-d", ".", "gs://blog.ethprod.xyz"]
+  # Build the Docker image.
+  - name: gcr.io/cloud-builders/docker
+    args: ['build', '-t', 'eu.gcr.io/$PROJECT_ID/docker-spa:$SHORT_SHA', '.']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'eu.gcr.io/$PROJECT_ID/docker-spa:$SHORT_SHA']
