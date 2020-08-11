@@ -5,3 +5,5 @@ steps:
     args: ['build', '-t', 'eu.gcr.io/$PROJECT_ID/docker-spa:$SHORT_SHA', '.']
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'eu.gcr.io/$PROJECT_ID/docker-spa:$SHORT_SHA']
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['beta', 'run', 'deploy', 'docker-spa', '--image=eu.gcr.io/$PROJECT_ID/docker-spa:$SHORT_SHA', '--region=europe-west1']
